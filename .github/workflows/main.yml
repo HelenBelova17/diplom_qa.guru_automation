@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6.2.0
       - name: Установка npm из package.json
-        run: npm ci
+        run: npm install
       - name: Установка браузеров
         run: npx playwright install --with-deps
       - name: Запускаем тесты
