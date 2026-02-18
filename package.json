@@ -1,0 +1,28 @@
+{
+  "name": "diplom_qa.guru_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npx playwright test",
+    "report": "npx playwright show-report",
+    "codegen": "npx playwright codegen",
+    "ui": "npx playwright test --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@faker-js/faker": "^10.3.0",
+    "@playwright/test": "^1.58.2",
+    "dotenv": "^17.3.1",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "allure-playwright": "^3.4.5"
+  }
+}
