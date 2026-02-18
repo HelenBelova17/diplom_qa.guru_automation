@@ -1,0 +1,23 @@
+name: diplom_qa.guru_automation
+# Когда запускаем
+on: 
+  push:
+    branches:
+      - main
+# ручной запуск
+  workflow_dispatch:
+  
+jobs:
+  pwTests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.2.0
+      - name: Установка npm из package.json
+        run: npm ci
+      - name: Установка браузеров
+        run: npx playwright install --with-deps
+      - name: Запускаем тесты
+        run: npm t
