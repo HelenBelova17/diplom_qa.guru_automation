@@ -8,14 +8,16 @@
   },
   "scripts": {
     "test": "npx playwright test",
-    "report": "npx playwright show-report",
     "codegen": "npx playwright codegen",
-    "ui": "npx playwright test --ui"
+    "ui": "npx playwright test --ui",
+    "reportAwesome": "npx allure awesome ./allure-results --single-file",
+    "reportClassic": "npx allure classic ./allure-results --single-file",
+    "report": "allure generate ./allure-results -o ./allure-report && allure open ./allure-report"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
     "@playwright/test": "^1.58.2",
