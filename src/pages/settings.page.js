@@ -1,3 +1,5 @@
+import { test } from '@playwright/test';
+
 export class SettingsPage {
     constructor(page) {
         this.passwordField = page.getByPlaceholder('Password');
@@ -6,18 +8,16 @@ export class SettingsPage {
     }
 
     async updatePassword(newPassword) {
-        await this.passwordField.click();
-        await this.passwordField.fill(newPassword);
-
-        await this.updateSettingsButton.click();
+        await test.step('Обновить пароль', async () => {
+            await this.passwordField.fill(newPassword);
+            await this.updateSettingsButton.click();
+        });
     }
 
-    async updateUsername(username) {
-        await this.usernameField.click();
-        await this.usernameField.fill(username);
-    }
-
-    async saveChanges() {
-        await this.updateSettingsButton.click();
+    async updateUsernameAndSave(username) {
+        await test.step('Обновить имя пользователя', async () => {
+            await this.usernameField.fill(username);
+            await this.updateSettingsButton.click();
+        });
     }
 }

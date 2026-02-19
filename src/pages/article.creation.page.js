@@ -1,7 +1,9 @@
+import { test } from '@playwright/test';
+
 export class ArticleCreationPage {
     constructor(page) {
         this.page = page;
-        
+
         this.newArticleTitle = page.getByPlaceholder('Article Title');
         this.newArticleDescription = page.getByPlaceholder('What\'s this article about?');
         this.newArticleContent = page.getByPlaceholder('Write your article (in markdown)');
@@ -12,24 +14,22 @@ export class ArticleCreationPage {
     }
 
     async gotoArticleCreation() {
-        await this.newArticleButton.click();
+        await test.step('Перейти к созданию статьи', async () => {
+            await this.newArticleButton.click();
+        });
     }
 
     async createNewArticle(title, description, content, tags) {
-        await this.newArticleTitle.click();
-        await this.newArticleTitle.fill(title);
+        await test.step(`Создать статью "${title}"`, async () => {
+            await this.newArticleTitle.fill(title);
+            await this.newArticleDescription.fill(description);
+            await this.newArticleContent.fill(content);
 
-        await this.newArticleDescription.click();
-        await this.newArticleDescription.fill(description);
+            tags.forEach((tag) => {
+                this.newArticleTags.fill(tag);
+            });
 
-        await this.newArticleContent.click();
-        await this.newArticleContent.fill(content);
-
-        tags.forEach((tag) => {
-            this.newArticleTags.click();
-            this.newArticleTags.fill(tag);
-        })
-
-        await this.newArticlePublishButton.click();
+            await this.newArticlePublishButton.click();
+        });
     }
 }

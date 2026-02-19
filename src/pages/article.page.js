@@ -1,9 +1,7 @@
-import {replaceSpecificSymbolsForLink} from "../helpers/utils/replacements";
-
-const ARTICTLE_PAGE_URL = 'https://realworld.qa.guru/#/article/';
+import { test } from '@playwright/test';
+import { replaceSpecificSymbolsForLink } from '../helpers/utils/replacements';
 
 export class ArticlePage {
-
     constructor(page) {
         this.page = page;
 
@@ -13,16 +11,18 @@ export class ArticlePage {
 
         this.newCommentInputField = page.getByPlaceholder('Write a comment...');
         this.publishButton = page.getByRole('button', { name: 'Post Comment' });
-
     }
 
     async gotoArticlePage(articleTitle) {
-       await this.page.goto(ARTICTLE_PAGE_URL + replaceSpecificSymbolsForLink(articleTitle));
+        await test.step(`Перейти к статье "${articleTitle}"`, async () => {
+            await this.page.goto(`#/article/${replaceSpecificSymbolsForLink(articleTitle)}`);
+        });
     }
 
-    async publishComment(comment){
-       await this.newCommentInputField.click();
-       await this.newCommentInputField.fill(comment);
-       await this.publishButton.click();
+    async publishComment(comment) {
+        await test.step('Опубликовать комментарий', async () => {
+            await this.newCommentInputField.fill(comment);
+            await this.publishButton.click();
+        });
     }
 }
